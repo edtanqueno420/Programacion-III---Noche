@@ -1,0 +1,1 @@
+console.log("Bienvenido a JAVASCRIPT – Concesionaria Libertadores desde un archivo externo");

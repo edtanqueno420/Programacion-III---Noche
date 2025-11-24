@@ -1,0 +1,1 @@
+console.log("Bienvenido a JAVASCRIPT desde un archivo externo")

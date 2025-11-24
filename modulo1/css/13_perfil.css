@@ -1,0 +1,27 @@
+/* Estilos base (móviles primero) */
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+
+}
+h1{
+    color: red;
+    text-align: center;
+}
+.card {
+    width: 250px;
+    text-align: center;
+    background-color: blue;
+    padding: 20px;
+    border-radius: 12px;
+    color: violet;
+}
+
+.perfil {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
