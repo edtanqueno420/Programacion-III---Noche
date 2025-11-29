@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { paginate, IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class CategoriesService {
@@ -16,7 +17,6 @@ export class CategoriesService {
     const category = this.categoryRepository.create(createCategoryDto);
     return this.categoryRepository.save(category);
   }
-
   findAll() {
     return this.categoryRepository.find();
   }
