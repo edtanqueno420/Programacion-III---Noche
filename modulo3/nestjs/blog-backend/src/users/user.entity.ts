@@ -8,10 +8,15 @@ export class User {
   @Column({ unique: true })
   username: string;
 
+  @Column({ unique: true })
+  email: string;
+
   @Column()
   password: string;
 
-  @Column()
-  role: string;
-}
+  @Column({ default: true })
+  isActive: boolean;
 
+  @Column({ nullable: true })
+  profile: string;
+}
