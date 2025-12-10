@@ -12,6 +12,7 @@ class InstructorDto {
   @IsNotEmpty()
   @IsString()
   email: string;
+
 }
 
 export class CreateCursoDto {

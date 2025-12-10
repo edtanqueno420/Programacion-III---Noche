@@ -10,12 +10,14 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { Category } from './category.entity';
 import { SuccessResponseDto } from 'src/common/dto/response.dto';
 import { QueryDto } from 'src/common/dto/query.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async create(@Body() dto: CreateCategoryDto): Promise<SuccessResponseDto<Category>> {
     const category = await this.categoriesService.create(dto);
     if (!category) throw new InternalServerErrorException('Failed to create category');
@@ -23,6 +25,7 @@ export class CategoriesController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   async findAll(
     @Query() query: QueryDto,
   ): Promise<SuccessResponseDto<Pagination<Category>>> {
@@ -38,6 +41,7 @@ export class CategoriesController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   async findOne(@Param('id') id: string) {
     const category = await this.categoriesService.findOne(id);
     if (!category) throw new NotFoundException('Category not found');
@@ -45,6 +49,7 @@ export class CategoriesController {
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   async update(@Param('id') id: string, @Body() dto: UpdateCategoryDto) {
     const category = await this.categoriesService.update(id, dto);
     if (!category) throw new NotFoundException('Category not found');
@@ -52,6 +57,7 @@ export class CategoriesController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: string) {
     const category = await this.categoriesService.remove(id);
     if (!category) throw new NotFoundException('Category not found');
