@@ -1,6 +1,7 @@
 import {
   Controller, Get, Post, Put, Delete,
-  Param, Body, Query, NotFoundException, InternalServerErrorException
+  Param, Body, Query, NotFoundException, InternalServerErrorException,
+  UseGuards
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -9,13 +10,13 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { Category } from './category.entity';
 import { SuccessResponseDto } from 'src/common/dto/response.dto';
 import { QueryDto } from 'src/common/dto/query.dto';
-
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
-  async create(@Body() dto: CreateCategoryDto) {
+  //@UseGuards(JwtAuthGuard)
+  async create(@Body() dto: CreateCategoryDto): Promise<SuccessResponseDto<Category>> {
     const category = await this.categoriesService.create(dto);
     if (!category) throw new InternalServerErrorException('Failed to create category');
     return new SuccessResponseDto('Category created successfully', category);
